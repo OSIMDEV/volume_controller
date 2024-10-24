@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     // Listen to system volume change
-    VolumeController().listener((volume) {
+    VolumeController().watchVolume().listen((volume) {
       setState(() => _volumeListenerValue = volume);
     });
 
@@ -28,7 +28,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-    VolumeController().removeListener();
     super.dispose();
   }
 
