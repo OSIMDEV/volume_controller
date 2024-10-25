@@ -29,12 +29,12 @@ class VolumeController {
 
   /// This method watches the system volume. A value will be generated each
   /// time the volume was changed.
-  Stream<double> watchVolume() {
+  Stream<double> get onVolumeChanged {
     return _eventChannel.receiveBroadcastStream().map((d) => d as double);
   }
 
   /// This method get the current system volume.
-  Future<double> getVolume() async {
+  Future<double> get currentVolume async {
     return await _methodChannel
         .invokeMethod<double>('getVolume')
         .then<double>((double? value) => value ?? 0);

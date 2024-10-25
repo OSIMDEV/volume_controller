@@ -19,11 +19,11 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     // Listen to system volume change
-    VolumeController().watchVolume().listen((volume) {
+    VolumeController().onVolumeChanged.listen((volume) {
       setState(() => _volumeListenerValue = volume);
     });
 
-    VolumeController().getVolume().then((volume) => _setVolumeValue = volume);
+    VolumeController().currentVolume.then((volume) => _setVolumeValue = volume);
   }
 
   @override
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                 Text('Volume is: $_getVolume'),
                 TextButton(
                   onPressed: () async {
-                    _getVolume = await VolumeController().getVolume();
+                    _getVolume = await VolumeController().currentVolume;
                     setState(() {});
                   },
                   child: Text('Get Volume'),
